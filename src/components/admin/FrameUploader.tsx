@@ -1,0 +1,78 @@
+"use client";
+
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { uploadFrame } from "@/lib/actions/admin";
+import { toast } from "sonner";
+import { Loader2 } from "lucide-react";
+
+export function FrameUploader() {
+  const [loading, setLoading] = useState(false);
+
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+            setLoading(true);
+
+                const formData = new FormData(e.currentTarget);
+                    const result = await uploadFrame(formData);
+
+                        if (result.success) {
+                              toast.success("Frame uploaded successfully!");
+                                    (e.target as HTMLFormElement).reset();
+                                        } else {
+                                              toast.error(result.error);
+                                                  }
+                                                      setLoading(false);
+                                                        };
+
+                                                          return (
+                                                              <form onSubmit={handleSubmit} className="space-y-4">
+                                                                    <div className="grid grid-cols-2 gap-4">
+                                                                            <div className="space-y-2">
+                                                                                      <label className="text-sm font-medium">Frame Name</label>
+                                                                                                <input name="name" required className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="e.g. Vintage Wood" />
+                                                                                                        </div>
+                                                                                                                <div className="space-y-2">
+                                                                                                                          <label className="text-sm font-medium">Style</label>
+                                                                                                                                    <input name="style" required className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="e.g. vintage" />
+                                                                                                                                            </div>
+                                                                                                                                                  </div>
+                                                                                                                                                        
+                                                                                                                                                              <div className="grid grid-cols-2 gap-4">
+                                                                                                                                                                      <div className="space-y-2">
+                                                                                                                                                                                <label className="text-sm font-medium">Color</label>
+                                                                                                                                                                                          <input name="color" required className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="e.g. brown" />
+                                                                                                                                                                                                  </div>
+                                                                                                                                                                                                          <div className="space-y-2">
+                                                                                                                                                                                                                    <label className="text-sm font-medium">Difficulty</label>
+                                                                                                                                                                                                                              <select name="difficulty" className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm">
+                                                                                                                                                                                                                                          <option value="easy">Easy</option>
+                                                                                                                                                                                                                                                      <option value="medium">Medium</option>
+                                                                                                                                                                                                                                                                  <option value="hard">Hard</option>
+                                                                                                                                                                                                                                                                            </select>
+                                                                                                                                                                                                                                                                                    </div>
+                                                                                                                                                                                                                                                                                          </div>
+
+                                                                                                                                                                                                                                                                                                <div className="grid grid-cols-2 gap-4">
+                                                                                                                                                                                                                                                                                                        <div className="space-y-2">
+                                                                                                                                                                                                                                                                                                                  <label className="text-sm font-medium">Width (px)</label>
+                                                                                                                                                                                                                                                                                                                            <input name="width_px" type="number" required className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="1000" />
+                                                                                                                                                                                                                                                                                                                                    </div>
+                                                                                                                                                                                                                                                                                                                                            <div className="space-y-2">
+                                                                                                                                                                                                                                                                                                                                                      <label className="text-sm font-medium">Height (px)</label>
+                                                                                                                                                                                                                                                                                                                                                                <input name="height_px" type="number" required className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="1000" />
+                                                                                                                                                                                                                                                                                                                                                                        </div>
+                                                                                                                                                                                                                                                                                                                                                                              </div>
+
+                                                                                                                                                                                                                                                                                                                                                                                    <div className="space-y-2">
+                                                                                                                                                                                                                                                                                                                                                                                            <label className="text-sm font-medium">Frame Image (Transparent PNG)</label>
+                                                                                                                                                                                                                                                                                                                                                                                                    <input name="image" type="file" accept="image/png" required className="flex w-full rounded-md border border-input bg-background px-3 py-2 text-sm file:border-0 file:bg-transparent file:text-sm file:font-medium" />
+                                                                                                                                                                                                                                                                                                                                                                                                          </div>
+
+                                                                                                                                                                                                                                                                                                                                                                                                                <Button type="submit" disabled={loading} className="w-full">
+                                                                                                                                                                                                                                                                                                                                                                                                                        {loading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
+                                                                                                                                                                                                                                                                                                                                                                                                                                {loading ? "Uploading..." : "Upload Frame"}
+                                                                                                                                                                                                                                                                                                                                                                                                                                      </Button>
+                                                                                                                                                                                                                                                                                                                                                                                                                                          </form>
+                                                                                                                                                                                                                                                                                                                                                                                                                                            );
+                                                                                                                                                                                                                                                                                                                                                                                                                                            }
