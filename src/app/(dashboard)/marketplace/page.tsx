@@ -9,7 +9,8 @@ export default async function MarketplacePage() {
           .from("art_pieces")
               .select("*")
                   .eq("is_published", true)
-                      .order("created_at", { ascending: false });
+                      .order("created_at", { ascending: false })
+                      .returns<any[]>();
 
                         return (
                             <div className="space-y-8">

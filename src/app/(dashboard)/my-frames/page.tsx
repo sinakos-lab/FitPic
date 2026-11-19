@@ -23,7 +23,8 @@ export default async function MyFramesPage() {
                                                       frames (name, style)
                                                           `)
                                                               .eq("user_id", user.id)
-                                                                  .order("created_at", { ascending: false });
+                                                                  .order("created_at", { ascending: false })
+                                                                  .returns<any[]>();
 
                                                                     return (
                                                                         <div className="space-y-8">

@@ -18,7 +18,7 @@ export default async function ArtPiecePage({
                   .select("*")
                       .eq("id", id)
                           .eq("is_published", true)
-                              .single();
+                              .single<any>();
 
                                 if (!art) {
                                     notFound();
