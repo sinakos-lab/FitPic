@@ -9,11 +9,7 @@ export default async function AdminPage() {
       if (!user) redirect("/login");
 
         // Check if user is admin
-          const { data: profile } = await supabase
-              .from("profiles")
-                  .select("role")
-                      .eq("id", user.id)
-                          .single();
+          const { data: profile } = await supabase.from("profiles").select("role").eq("id", user.id).single<{ role: string }>();
 
                             if (profile?.role !== "admin") {
                                 return (

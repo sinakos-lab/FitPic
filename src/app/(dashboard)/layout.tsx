@@ -15,11 +15,7 @@ export default async function DashboardLayout({
                 }
 
                   // Fetch the user's role from the profiles table
-                    const { data: profile } = await supabase
-                        .from("profiles")
-                            .select("role")
-                                .eq("id", user.id)
-                                    .single();
+                    const { data: profile } = await supabase.from("profiles").select("role").eq("id", user.id).single<{ role: string }>();
 
                                       const isAdmin = profile?.role === "admin";
 
