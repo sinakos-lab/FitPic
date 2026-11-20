@@ -38,7 +38,7 @@ export async function uploadFrame(formData: FormData) {
                                                     const inner_width = Math.round(width * 0.8);
                                                       const inner_height = Math.round(height * 0.8);
 
-                                                        const { error: dbError } = await supabase.from("frames").insert({
+                                                        const { error: dbError } = await supabase.from("frames").insert<any>({})
                                                             name: formData.get("name") as string,
                                                                 style: formData.get("style") as string,
                                                                     color: formData.get("color") as string,
