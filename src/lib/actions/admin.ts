@@ -10,7 +10,7 @@ export async function uploadFrame(formData: FormData) {
       if (!user) return { success: false, error: "Not authenticated" };
 
         // Verify admin
-          const { data: profile } = await supabase.from("profiles").select("role").eq("id", user.id).single();
+          const { data: profile } = await supabase.from("profiles").select("role").eq("id", user.id).single<{ role: string }>();
             if (profile?.role !== "admin") return { success: false, error: "Not authorized" };
 
               const file = formData.get("image") as File;
