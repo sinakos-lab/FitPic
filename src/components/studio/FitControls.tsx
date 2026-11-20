@@ -47,7 +47,7 @@ export default function FitControls() {
             max={MAX_SCALE}
             step={0.01}
             disabled={disabled}
-            onValueChange={([val]) => setUniformScale(val)}
+            onValueChange={(val) => setUniformScale(Array.isArray(val) ? val[0] : val)}
             className="flex-1"
           />
           <Button
