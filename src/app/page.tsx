@@ -21,7 +21,7 @@ export default function Home() {
                                                                                                                 
                                                                                                                         {/* The Guest Button */}
                                                                                                                                 <form action={continueAsGuest}>
-                                                                                                                                          <Button size="lg" variant="secondary" className="w-full sm:w-auto">
+                                                                                                                                          <Button type="submit" size="lg" variant="secondary" className="w-full sm:w-auto">
                                                                                                                                                       Continue as Guest
                                                                                                                                                                 </Button>
                                                                                                                                                                         </form>
